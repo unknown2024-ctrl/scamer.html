@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBI Seizure Alert</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #alert {
+            font-size: 3em;
+            text-align: center;
+            padding: 30px;
+            background-color: red;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+
+        #locked {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #volumeAlert {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.5em;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="alert">ALERT: Your device has been seized by the FBI</div>
+    <div id="locked">You cannot close this page. Your device is under investigation.</div>
+    <div id="volumeAlert">Volume is set to maximum!</div>
+    <script>
+        // Lock the screen by making the page full-screen and not closing
+        window.onload = function() {
+            document.body.requestFullscreen().catch(err => console.log(err));
+        }
+
+        // Make the volume max
+        let audio = new Audio(''); // empty audio to access volume controls
+        audio.volume = 1; // Max volume
+
+        // Prevent interaction with the page
+        document.body.style.pointerEvents = 'none';
+
+        // Self-destruct after closing the page
+        window.onbeforeunload = function() {
+            alert("Your device has been restored, the malware is gone!");
+        }
+    </script>
+</body>
+</html>
